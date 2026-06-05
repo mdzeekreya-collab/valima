@@ -2,273 +2,379 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Valima Invitation - Mohammed Shaker Ali</title>
-    
-    <!-- Load React and Tailwind directly in the browser -->
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valima Invitation - Shaker Ali & Bride</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+    <!-- Google Fonts for Elegant Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
-      
-      .font-script { font-family: 'Great Vibes', cursive; }
-      .font-heading { font-family: 'Playfair Display', serif; }
-      .font-body { font-family: 'Cinzel', serif; }
-
-      @keyframes fadeUpIn { 0% { opacity: 0; transform: translateY(30px) scale(0.95); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
-      @keyframes zoomSlow { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
-      @keyframes spinSlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-      @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-      @keyframes slideDown { 0% { transform: translateY(-100%); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
-      
-      .animate-fade-up { animation: fadeUpIn 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-      .animate-zoom-slow { animation: zoomSlow 20s linear infinite alternate; }
-      .animate-spin-slow { animation: spinSlow 30s linear infinite; }
-      .animate-float { animation: float 4s ease-in-out infinite; }
-      .animate-toast { animation: slideDown 0.3s ease-out forwards; }
-      
-      .delay-100 { animation-delay: 0.1s; opacity: 0; }
-      .delay-300 { animation-delay: 0.3s; opacity: 0; }
-      .delay-500 { animation-delay: 0.5s; opacity: 0; }
-      .delay-700 { animation-delay: 0.7s; opacity: 0; }
-      .delay-900 { animation-delay: 0.9s; opacity: 0; }
-      .delay-1200 { animation-delay: 1.2s; opacity: 0; }
-    </style>
-</head>
-<body class="bg-neutral-900 m-0 p-0">
-    <div id="root"></div>
-    
-    <script type="text/babel">
-        const { useState, useEffect } = React;
-
-        // Icons
-        const PlayIcon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>;
-        const RotateCcwIcon = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>;
-        const Volume2Icon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>;
-        const VolumeXIcon = () => <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>;
-        const HeartIcon = ({className, size}) => <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>;
-        const StarIcon = ({className, size}) => <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>;
-        const Share2Icon = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>;
-
-        function App() {
-            const [isPlaying, setIsPlaying] = useState(false);
-            const [currentSlide, setCurrentSlide] = useState(0);
-            const [isMuted, setIsMuted] = useState(true);
-            const [videoEnded, setVideoEnded] = useState(false);
-            const [toastMessage, setToastMessage] = useState('');
-
-            const totalSlides = 5;
-            const slideDuration = 5500;
-
-            useEffect(() => {
-                let timer;
-                if (isPlaying && !videoEnded) {
-                    timer = setInterval(() => {
-                        setCurrentSlide((prev) => {
-                            if (prev === totalSlides - 1) {
-                                setVideoEnded(true);
-                                setIsPlaying(false);
-                                return prev;
-                            }
-                            return prev + 1;
-                        });
-                    }, slideDuration);
-                }
-                return () => clearInterval(timer);
-            }, [isPlaying, videoEnded]);
-
-            const startVideo = () => { setIsPlaying(true); setVideoEnded(false); setCurrentSlide(0); };
-            const restartVideo = () => { setCurrentSlide(0); setVideoEnded(false); setIsPlaying(true); };
-
-            const handleShare = async () => {
-                const shareData = { title: 'Valima Invitation - Mohammed Shaker Ali', text: 'You are cordially invited to the Valima Ceremony of Mohammed Shaker Ali.', url: window.location.href };
-                if (navigator.share) {
-                    try { await navigator.share(shareData); } catch (err) { fallbackCopy(); }
-                } else { fallbackCopy(); }
-            };
-
-            const fallbackCopy = () => {
-                const textArea = document.createElement("textarea");
-                textArea.value = window.location.href;
-                document.body.appendChild(textArea);
-                textArea.select();
-                try { document.execCommand('copy'); showToast('Link copied!'); } 
-                catch (err) { showToast('Failed to copy link.'); }
-                document.body.removeChild(textArea);
-            };
-
-            const showToast = (msg) => { setToastMessage(msg); setTimeout(() => setToastMessage(''), 3000); };
-
-            return (
-                <div className="min-h-screen bg-neutral-900 flex items-center justify-center p-0 sm:p-4 font-serif">
-                  <div className="relative w-full max-w-[400px] h-[100dvh] sm:h-[800px] sm:max-h-[90vh] bg-[#3a0a14] sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col text-[#f3e5d0]">
-                    
-                    {toastMessage && (
-                      <div className="absolute top-16 left-1/2 -translate-x-1/2 z-[60] bg-[#d4af37] text-[#3a0a14] px-4 py-2 rounded-full text-sm font-semibold shadow-lg animate-toast whitespace-nowrap">
-                        {toastMessage}
-                      </div>
-                    )}
-
-                    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-20 flex items-center justify-center">
-                       <div className="w-[150%] h-[150%] animate-spin-slow animate-zoom-slow opacity-30">
-                          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full fill-[#d4af37]">
-                            <path d="M100 0L110 40L150 30L130 65L170 85L130 100L170 115L130 135L150 170L110 160L100 200L90 160L50 170L70 135L30 115L70 100L30 85L70 65L50 30L90 40Z" />
-                          </svg>
-                       </div>
-                    </div>
-
-                    <div className="absolute top-4 left-4 w-16 h-16 border-t-2 border-l-2 border-[#d4af37] opacity-60 rounded-tl-xl z-10 pointer-events-none"></div>
-                    <div className="absolute top-4 right-4 w-16 h-16 border-t-2 border-r-2 border-[#d4af37] opacity-60 rounded-tr-xl z-10 pointer-events-none"></div>
-                    <div className="absolute bottom-4 left-4 w-16 h-16 border-b-2 border-l-2 border-[#d4af37] opacity-60 rounded-bl-xl z-10 pointer-events-none"></div>
-                    <div className="absolute bottom-4 right-4 w-16 h-16 border-b-2 border-r-2 border-[#d4af37] opacity-60 rounded-br-xl z-10 pointer-events-none"></div>
-
-                    {isPlaying && (
-                      <div className="absolute top-6 right-6 z-50 flex gap-4">
-                        <button onClick={() => setIsMuted(!isMuted)} className="p-2 bg-black/20 rounded-full backdrop-blur-sm text-[#d4af37] transition hover:bg-black/40">
-                          {isMuted ? <VolumeXIcon /> : <Volume2Icon />}
-                        </button>
-                      </div>
-                    )}
-
-                    {(isPlaying || videoEnded) && (
-                      <div className="absolute top-0 left-0 right-0 h-1 bg-black/30 z-50 flex">
-                        {[...Array(totalSlides)].map((_, index) => (
-                          <div key={index} className="flex-1 h-full mx-[1px] bg-white/20 overflow-hidden">
-                            <div 
-                              className={`h-full bg-[#d4af37] transition-all duration-[5500ms] ease-linear origin-left`}
-                              style={{ 
-                                width: currentSlide > index ? '100%' : currentSlide === index && isPlaying ? '100%' : '0%',
-                                transitionDuration: currentSlide === index && isPlaying ? `${slideDuration}ms` : '0ms'
-                              }}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    <div className="relative z-20 flex-1 flex flex-col items-center justify-center p-8 text-center h-full">
-                      
-                      {!isPlaying && !videoEnded && (
-                        <div className="flex flex-col items-center animate-fade-up">
-                          <div className="w-24 h-24 rounded-full border-2 border-[#d4af37] flex items-center justify-center mb-6 animate-float">
-                            <StarIcon className="text-[#d4af37]" size="40" />
-                          </div>
-                          <h1 className="font-heading text-3xl font-semibold text-[#d4af37] mb-2 tracking-wide">Valima Invitation</h1>
-                          <p className="font-body text-sm text-[#f3e5d0]/70 mb-12 uppercase tracking-widest">Mohammed Shaker Ali</p>
-                          
-                          <button onClick={startVideo} className="group relative px-8 py-3 bg-[#d4af37] text-[#3a0a14] rounded-full font-bold uppercase tracking-wider text-sm flex items-center gap-2 hover:bg-[#eadd99] transition-all overflow-hidden">
-                            <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform"></span>
-                            <PlayIcon /> Play Invitation
-                          </button>
-                        </div>
-                      )}
-
-                      {isPlaying && currentSlide === 0 && (
-                        <div className="flex flex-col items-center w-full">
-                          <div className="text-4xl text-[#d4af37] mb-6 animate-fade-up font-body">﷽</div>
-                          <p className="font-body text-xs tracking-widest uppercase text-[#d4af37] mb-8 animate-fade-up delay-300">
-                            In the name of Allah, <br/>the most beneficent & merciful
-                          </p>
-                          <div className="relative py-8 animate-fade-up delay-500">
-                            <HeartIcon className="absolute top-0 left-1/2 -translate-x-1/2 text-[#d4af37]/30" size="24" />
-                            <p className="font-heading italic text-lg leading-relaxed text-[#f3e5d0]/90 mt-4 px-4">
-                              "Oh Allah bless & guide this couple to the best of Understanding, happiness, prosperity and success."
-                            </p>
-                            <p className="font-heading text-[#d4af37] mt-4 font-semibold">(Ameen)</p>
-                          </div>
-                        </div>
-                      )}
-
-                      {isPlaying && currentSlide === 1 && (
-                        <div className="flex flex-col items-center w-full">
-                          <p className="font-body text-xs tracking-widest uppercase text-[#d4af37] mb-4 animate-fade-up">With the blessings from:</p>
-                          <h2 className="font-heading text-lg font-semibold mb-1 animate-fade-up delay-100 text-[#f3e5d0]">Late Mrs. & Mr. Abdul Raheem Sahab</h2>
-                          <p className="font-script text-2xl text-[#d4af37] mb-8 animate-fade-up delay-300">Dange Wale</p>
-                          <div className="w-16 h-[1px] bg-[#d4af37]/40 mb-8 animate-fade-up delay-500"></div>
-                          <h2 className="font-heading text-2xl font-bold mb-2 animate-fade-up delay-700 text-[#f3e5d0]">Mrs. & Mr. Mohammed Rafi</h2>
-                          <p className="font-body text-xs text-[#d4af37] tracking-wider mb-8 animate-fade-up delay-700">( Plumber )</p>
-                          <p className="font-heading italic text-sm text-[#f3e5d0]/80 leading-loose animate-fade-up delay-900 px-2">Solicit your gracious presence on the auspicious occasion of</p>
-                          <h3 className="font-body text-2xl text-[#d4af37] font-bold mt-4 tracking-widest animate-fade-up delay-1200 drop-shadow-md">VALIMA CEREMONY</h3>
-                        </div>
-                      )}
-
-                      {isPlaying && currentSlide === 2 && (
-                        <div className="flex flex-col items-center w-full">
-                          <p className="font-body text-sm tracking-widest uppercase text-[#f3e5d0]/70 mb-4 animate-fade-up">Of my Brother</p>
-                          <h1 className="font-script text-5xl sm:text-6xl text-[#d4af37] my-2 animate-fade-up delay-100 drop-shadow-lg text-center leading-tight">Mohammed Shaker Ali</h1>
-                          <p className="font-body text-xs tracking-widest text-[#f3e5d0]/60 mb-8 animate-fade-up delay-300">(Employee UAE)</p>
-                          <div className="flex items-center gap-4 my-4 animate-fade-up delay-500">
-                            <div className="w-12 h-[1px] bg-[#d4af37]"></div>
-                            <span className="font-heading italic text-lg text-[#d4af37]">With</span>
-                            <div className="w-12 h-[1px] bg-[#d4af37]"></div>
-                          </div>
-                          <p className="font-body text-sm tracking-widest uppercase text-[#f3e5d0]/70 mt-6 mb-2 animate-fade-up delay-700">Daughter of</p>
-                          <h2 className="font-heading text-xl font-bold text-[#f3e5d0] animate-fade-up delay-900">Mr. Mohammed Younus Sahab</h2>
-                          <p className="font-script text-2xl text-[#d4af37] mt-1 mb-2 animate-fade-up delay-900">Dange Wale</p>
-                          <p className="font-body text-xs tracking-widest text-[#f3e5d0]/60 animate-fade-up delay-1200">R/o Rao Taleem, Bidar</p>
-                        </div>
-                      )}
-
-                      {isPlaying && currentSlide === 3 && (
-                        <div className="flex flex-col items-center w-full">
-                          <h3 className="font-script text-4xl text-[#d4af37] mb-8 animate-fade-up">Valima Dinner</h3>
-                          <div className="bg-black/20 p-6 rounded-2xl border border-[#d4af37]/20 w-full backdrop-blur-sm animate-fade-up delay-300">
-                            <p className="font-heading text-xl text-[#f3e5d0] mb-2 font-semibold">Friday, 12th June 2026</p>
-                            <p className="font-body text-xs text-[#d4af37] mb-6 tracking-wider">(25th Zilhajja 1447 Hijri)</p>
-                            <div className="flex items-center justify-center gap-2 text-[#f3e5d0] mb-6">
-                              <div className="w-8 h-[1px] bg-[#d4af37]/50"></div>
-                              <p className="font-heading text-lg font-medium">After Isha (8:30 P.M.)</p>
-                              <div className="w-8 h-[1px] bg-[#d4af37]/50"></div>
-                            </div>
-                            <p className="font-body text-sm tracking-widest text-[#d4af37] mb-2 uppercase">Venue:</p>
-                            <h4 className="font-heading text-xl font-bold text-[#f3e5d0] mb-1">NIZAM'S FUNCTION PALACE</h4>
-                            <p className="font-body text-sm text-[#f3e5d0]/70">Fort Road, Bidar</p>
-                          </div>
-                        </div>
-                      )}
-
-                      {isPlaying && currentSlide === 4 && (
-                        <div className="flex flex-col items-center w-full">
-                          <div className="mb-8 animate-fade-up flex justify-center text-[#d4af37]">
-                            <svg width="100" height="30" viewBox="0 0 100 30" fill="currentColor">
-                              <path d="M50 15 Q 25 -5 0 15 Q 25 35 50 15 M50 15 Q 75 -5 100 15 Q 75 35 50 15" stroke="currentColor" fill="none" strokeWidth="1"/>
-                              <circle cx="50" cy="15" r="3"/>
-                            </svg>
-                          </div>
-                          <h3 className="font-heading italic text-2xl text-[#d4af37] mb-8 animate-fade-up delay-300">With Best Compliments From:</h3>
-                          <div className="font-body text-xs sm:text-sm leading-loose text-[#f3e5d0]/90 text-center px-4 animate-fade-up delay-500">
-                            Md. Zakir Hussain, Md. Naser Hussain, <br/>Md. Nazim Hussain, Md. Tabrez, <br/>Md. Azhar, Md. Zikriya, <br/>Md. Samiuddin, Md. Muzammil, <br/>Md. Riyaz
-                          </div>
-                          <div className="w-24 h-[1px] bg-[#d4af37]/40 my-8 animate-fade-up delay-700"></div>
-                          <p className="font-heading font-bold text-lg text-[#d4af37] tracking-widest uppercase animate-fade-up delay-900">Relatives & Friends</p>
-                        </div>
-                      )}
-
-                      {videoEnded && (
-                        <div className="flex flex-col items-center animate-fade-up w-full px-6">
-                           <h2 className="font-script text-5xl text-[#d4af37] mb-4">Thank You</h2>
-                           <p className="font-body text-sm text-[#f3e5d0]/70 mb-10 tracking-widest uppercase text-center">Looking forward to your presence</p>
-                           <div className="flex flex-col gap-4 w-full max-w-[250px]">
-                             <button onClick={handleShare} className="w-full py-3 bg-[#d4af37] text-[#3a0a14] rounded-full font-bold uppercase tracking-wider text-sm flex items-center justify-center gap-2 hover:bg-[#eadd99] transition-all">
-                              <Share2Icon /> Share Link
-                             </button>
-                             <button onClick={restartVideo} className="w-full py-3 border border-[#d4af37] text-[#d4af37] rounded-full font-body uppercase tracking-wider text-xs flex items-center justify-center gap-2 hover:bg-[#d4af37]/10 transition-colors">
-                              <RotateCcwIcon /> Replay
-                             </button>
-                           </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-            );
+        /* Animated Champagne & Blush Background */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(-45deg, #FFF5E4, #FFE3E1, #F8EDE3, #E8D8C4);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow-x: hidden;
+            color: #2c080e; 
+        }
+
+        .font-royal { font-family: 'Cinzel', serif; }
+        .font-script { font-family: 'Alex Brush', cursive; }
+        .font-serif-elegant { font-family: 'Playfair Display', serif; }
+        
+        /* Envelope Flip Animation */
+        .envelope-wrapper { perspective: 1000px; }
+        .envelope {
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .envelope.open {
+            transform: translateY(150px) rotateX(-10deg);
+        }
+        .flap {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 50%;
+            background: linear-gradient(135deg, #F9F1E7, #EAE0D5); 
+            clip-path: polygon(0 0, 50% 60%, 100% 0);
+            transform-origin: top;
+            transition: transform 0.6s ease-in-out 0.3s, z-index 0.2s ease-in-out 0.5s;
+            z-index: 3;
+            border-bottom: 2px solid #D4AF37;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .envelope.open .flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+        
+        /* Double Gold Border for Fancy Look */
+        .fancy-border {
+            border: 4px double #D4AF37;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15), inset 0 0 20px rgba(212, 175, 55, 0.05);
+        }
+
+        /* Enhanced Gold Gradients */
+        .gold-gradient-text {
+            background: linear-gradient(to right, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .gold-script {
+            color: #B8860B;
+            text-shadow: 1px 1px 2px rgba(184, 134, 11, 0.2);
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Ambient Sparkles */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg) scale(0.8); opacity: 0; }
+            50% { transform: translateY(-60px) rotate(180deg) scale(1.2); opacity: 0.8; }
+            100% { transform: translateY(-120px) rotate(360deg) scale(0.8); opacity: 0; }
+        }
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(212,175,55,0.8) 0%, rgba(212,175,55,0) 70%);
+            border-radius: 50%;
+            animation: float 8s infinite linear;
+            box-shadow: 0 0 10px rgba(212,175,55,0.4);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-start p-4 md:p-8 relative overflow-y-auto">
+
+    <div id="sparkle-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <!-- Music Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="music-btn" class="w-12 h-12 rounded-full bg-white/80 backdrop-blur border border-[#D4AF37] flex items-center justify-center text-[#D4AF37] shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:bg-white transition-all hover:scale-110">
+            <i data-lucide="music"></i>
+        </button>
+        <!-- Replaced source with relative path for local GitHub hosting -->
+        <audio id="bg-music" loop>
+            <source src="song.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="w-full max-w-xl mx-auto flex flex-col items-center z-10 py-10">
+        
+        <!-- ENVELOPE -->
+        <div id="envelope-container" class="w-full aspect-[4/3] max-w-md envelope-wrapper relative cursor-pointer my-8" onclick="openEnvelope()">
+            <div id="envelope" class="envelope w-full h-full bg-gradient-to-br from-[#FFF] to-[#FDF5E6] rounded-lg shadow-2xl border border-[#D4AF37]/40 flex items-center justify-center">
+                <div class="flap"></div>
+                <div class="absolute z-10 flex flex-col items-center justify-center text-center px-4">
+                    <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-[#EAE0D5] to-[#FFF] border-2 border-[#D4AF37] flex items-center justify-center shadow-lg transition-transform hover:scale-115">
+                        <span class="font-royal text-xl text-[#8B6508] tracking-wider font-bold">VALIMA</span>
+                    </div>
+                    <p class="text-[#8B6508] font-serif-elegant mt-4 text-lg tracking-widest italic">An Invitation to Celebrate Love</p>
+                    <p class="text-[#8B6508]/60 text-xs mt-2 uppercase tracking-widest animate-pulse">Click to Open</p>
+                </div>
+                <div class="absolute inset-0 bg-[#FDF9F3] rounded-lg z-0 inner-shadow"></div>
+            </div>
+        </div>
+
+        <!-- MAIN DIGITAL CARD -->
+        <div id="main-card-section" class="w-full transition-all duration-1000 transform opacity-0 translate-y-10 pointer-events-none hidden">
+            
+            <div class="w-full glass-card rounded-2xl fancy-border p-6 md:p-10 text-center relative overflow-hidden mb-8">
+                
+                <!-- Bismillah Motif -->
+                <div class="flex justify-center mb-6">
+                    <div class="border border-[#D4AF37]/60 rounded-full px-6 py-2 bg-white/50 shadow-sm">
+                        <span class="text-xs tracking-widest uppercase text-[#8B6508] font-medium">In the name of Allah, the most beneficent & merciful</span>
+                    </div>
+                </div>
+
+                <p class="font-serif-elegant text-sm md:text-base text-gray-700 italic max-w-sm mx-auto mb-8 leading-relaxed">
+                    "Oh Allah bless & guide this couple to the best of Understanding, happiness, prosperity and success (Ameen)."
+                </p>
+
+                <div class="mb-8">
+                    <span class="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold">With the blessings from:</span>
+                    <h4 class="font-royal text-md md:text-lg text-[#5C3A21] mt-2 font-bold tracking-wide">LATE MRS. & MR. ABDUL RAHEEM SAHAB</h4>
+                    <p class="text-xs text-[#8B6508] italic font-medium mt-1">(Dange Wale)</p>
+                </div>
+
+                <div class="mb-10 bg-gradient-to-b from-[#FDF5E6]/60 to-transparent py-5 px-3 rounded-xl border-t border-b border-[#D4AF37]/30">
+                    <p class="text-xs md:text-sm text-gray-800 leading-relaxed">
+                        <span class="font-serif-elegant text-[#5C3A21] font-bold text-xl block mb-1">Mrs. & Mr. Mohammed Rafi</span>
+                        <span class="text-xs text-[#8B6508] font-medium">(Plumber)</span><br><br>
+                        solicit your gracious presence on the auspicious occasion of the
+                    </p>
+                    <h2 class="font-royal text-3xl md:text-4xl font-bold tracking-widest gold-gradient-text mt-5 mb-2">VALIMA CEREMONY</h2>
+                    <p class="text-xs uppercase tracking-widest text-[#8B6508] font-semibold mt-1">of his beloved Brother</p>
+                </div>
+
+                <!-- Groom -->
+                <div class="my-10">
+                    <div class="mb-6">
+                        <!-- Fancy Script Name -->
+                        <h1 class="font-script text-5xl md:text-7xl gold-script tracking-wide py-2">Mohammed Shaker Ali</h1>
+                        <p class="text-xs text-[#8B6508] uppercase tracking-widest mt-2 font-medium">(Employee UAE)</p>
+                    </div>
+
+                    <!-- Decorative Intersecting Rings -->
+                    <div class="flex justify-center items-center my-8">
+                        <div class="h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent w-24"></div>
+                        <div class="mx-4 text-[#D4AF37] drop-shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-8 h-8 inline" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </div>
+                        <div class="h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent w-24"></div>
+                    </div>
+
+                    <!-- Bride Info -->
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold block mb-2">With the beloved Daughter of</span>
+                        <h2 class="font-serif-elegant text-2xl md:text-3xl font-bold text-[#5C3A21] tracking-wide">Mr. Mohammed Younus Sahab</h2>
+                        <p class="text-xs text-[#8B6508] uppercase tracking-widest mt-2 font-medium">(Dange Wale)</p>
+                        <p class="text-xs text-gray-600 italic mt-1">R/o Rao Taleem, Bidar</p>
+                    </div>
+                </div>
+
+                <!-- Event Details Section -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-12 mb-10 text-left border-t border-b border-[#D4AF37]/30 py-8 relative">
+                    
+                    <div class="flex items-start space-x-4 p-4 rounded-xl bg-white/60 shadow-sm border border-white/50 hover:shadow-md transition-shadow">
+                        <div class="p-3 rounded-full bg-gradient-to-br from-[#FFF] to-[#F4E1D2] shadow-inner text-[#D4AF37] border border-[#D4AF37]/20">
+                            <i data-lucide="calendar" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-royal text-sm text-[#8B6508] uppercase tracking-wider font-bold">Valima Dinner</h4>
+                            <p class="text-[#2c080e] font-bold text-sm mt-1.5">Friday, 12th June 2026</p>
+                            <p class="text-gray-600 text-xs mt-0.5">(25th Zilhajja 1447 Hijri)</p>
+                            <div class="flex items-center space-x-1.5 text-[#8B6508] text-xs mt-2.5 font-bold">
+                                <i data-lucide="clock" class="w-4 h-4"></i>
+                                <span>After Isha (8:30 P.M.)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4 p-4 rounded-xl bg-white/60 shadow-sm border border-white/50 hover:shadow-md transition-shadow">
+                        <div class="p-3 rounded-full bg-gradient-to-br from-[#FFF] to-[#F4E1D2] shadow-inner text-[#D4AF37] border border-[#D4AF37]/20">
+                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-royal text-sm text-[#8B6508] uppercase tracking-wider font-bold">Venue</h4>
+                            <p class="text-[#2c080e] font-bold text-sm mt-1.5">Nizam's Function Palace</p>
+                            <p class="text-gray-600 text-xs mt-0.5">Fort Road, Bidar</p>
+                            <a href="https://maps.google.com/?q=Nizams+Function+Palace+Fort+Road+Bidar" target="_blank" class="inline-flex items-center space-x-1 text-[#D4AF37] hover:text-[#8B6508] transition-colors text-xs mt-2.5 font-bold">
+                                <span>Navigate via Map</span>
+                                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add to Calendar Action -->
+                <div class="mb-10">
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Valima+Ceremony+-+Shaker+Ali&dates=20260612T150000Z/20260612T190000Z&details=Valima+Dinner+of+Mohammed+Shaker+Ali+at+Nizam%27s+Function+Palace,+Fort+Road,+Bidar.&location=Nizam%27s+Function+Palace,+Fort+Road,+Bidar" target="_blank" class="inline-flex items-center space-x-2 bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-white shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all px-6 py-3 rounded-full text-xs tracking-widest uppercase font-bold">
+                        <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+                        <span>Save to Calendar</span>
+                    </a>
+                </div>
+
+                <!-- Best Compliments From -->
+                <div class="border-t border-[#D4AF37]/20 pt-8">
+                    <span class="text-xs uppercase tracking-widest text-[#8B6508] font-bold block mb-4">With Best Compliments From:</span>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-center text-xs text-[#5C3A21] font-medium">
+                        <div class="p-2 bg-white/40 border border-white/50 rounded-lg shadow-sm">Md. Zakir Hussain</div>
+                        <div class="p-2 bg-white/40 border border-white/50 rounded-lg shadow-sm">Md. Naser Hussain</div>
+                        <div class="p-2 bg-white/40 border border-white/50 rounded-lg shadow-sm">Md. Nazim Hussain</div>
+                        <div class="p-2 bg-white/40 border border-white/50 rounded-lg shadow-sm">Md. Tabrez</div>
+                        <div class="p-2 bg-white/40 border border-white/50 rounded-lg shadow-sm">Md. Azhar</div>
+                        <div class="p-2 bg-white/40 border border-white/50 rounded-lg shadow-sm">Md. Zikriya</div>
+                        <div class="p-2 bg-white/40 border border-white/50 rounded-lg shadow-sm">Md. Samiuddin</div>
+                        <div class="p-2 bg-white/40 border border-white/50 rounded-lg shadow-sm">Md. Muzammil</div>
+                        <div class="p-2 bg-white/40 border border-white/50 rounded-lg shadow-sm">Md. Riyaz</div>
+                    </div>
+                    <p class="text-center text-sm text-[#D4AF37] mt-5 font-bold font-serif-elegant">& All Relatives & Friends</p>
+                </div>
+
+            </div>
+
+            <!-- COUNTDOWN TIMER CONTAINER -->
+            <div class="w-full glass-card rounded-2xl fancy-border p-6 md:p-8 text-center mb-8">
+                <h3 class="font-royal text-md text-[#8B6508] font-bold uppercase tracking-widest mb-5">Celebrating In</h3>
+                <div class="grid grid-cols-4 gap-3 text-center">
+                    <div class="bg-white/50 p-4 rounded-xl shadow-sm border border-white">
+                        <span id="days" class="block text-3xl font-bold text-[#5C3A21] font-serif-elegant drop-shadow-sm">00</span>
+                        <span class="text-[10px] text-[#8B6508] font-bold uppercase tracking-wider mt-1 block">Days</span>
+                    </div>
+                    <div class="bg-white/50 p-4 rounded-xl shadow-sm border border-white">
+                        <span id="hours" class="block text-3xl font-bold text-[#5C3A21] font-serif-elegant drop-shadow-sm">00</span>
+                        <span class="text-[10px] text-[#8B6508] font-bold uppercase tracking-wider mt-1 block">Hours</span>
+                    </div>
+                    <div class="bg-white/50 p-4 rounded-xl shadow-sm border border-white">
+                        <span id="minutes" class="block text-3xl font-bold text-[#5C3A21] font-serif-elegant drop-shadow-sm">00</span>
+                        <span class="text-[10px] text-[#8B6508] font-bold uppercase tracking-wider mt-1 block">Mins</span>
+                    </div>
+                    <div class="bg-white/50 p-4 rounded-xl shadow-sm border border-white">
+                        <span id="seconds" class="block text-3xl font-bold text-[#5C3A21] font-serif-elegant drop-shadow-sm">00</span>
+                        <span class="text-[10px] text-[#8B6508] font-bold uppercase tracking-wider mt-1 block">Secs</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // 1. Sparkle Background Effect
+        const sparkleContainer = document.getElementById('sparkle-container');
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            const size = Math.random() * 6 + 3; // slightly smaller, elegant sparkles
+            sparkle.style.width = `${size}px`;
+            sparkle.style.height = `${size}px`;
+            sparkle.style.left = `${Math.random() * 100}%`;
+            sparkle.style.top = `${Math.random() * 100 + 100}%`;
+            sparkle.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            sparkleContainer.appendChild(sparkle);
+            setTimeout(() => {
+                sparkle.remove();
+            }, 10000);
+        }
+        setInterval(createSparkle, 600);
+
+        // 2. Open Envelope Functionality
+        function openEnvelope() {
+            const envelope = document.getElementById('envelope');
+            const mainSection = document.getElementById('main-card-section');
+            const envelopeContainer = document.getElementById('envelope-container');
+
+            envelope.classList.add('open');
+            playMusic();
+
+            setTimeout(() => {
+                mainSection.classList.remove('hidden');
+                setTimeout(() => {
+                    mainSection.classList.remove('opacity-0', 'translate-y-10');
+                    mainSection.classList.add('opacity-100', 'translate-y-0');
+                    envelopeContainer.style.display = 'none';
+                }, 100);
+            }, 1400);
+        }
+
+        // 3. Audio Player Logic
+        const musicBtn = document.getElementById('music-btn');
+        const bgMusic = document.getElementById('bg-music');
+        let isPlaying = false;
+
+        function playMusic() {
+            bgMusic.play().then(() => {
+                isPlaying = true;
+                musicBtn.classList.add('animate-spin');
+                musicBtn.style.animationDuration = '8s';
+            }).catch(err => {
+                console.log("Audio waiting for explicit user interaction:", err);
+            });
+        }
+
+        musicBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.classList.remove('animate-spin');
+                isPlaying = false;
+            } else {
+                playMusic();
+            }
+        });
+
+        // 4. Countdown Timer logic (Target: June 12, 2026 at 8:30 PM)
+        const targetDate = new Date("June 12, 2026 20:30:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference < 0) {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initialize immediately on load
+
     </script>
 </body>
 </html>
